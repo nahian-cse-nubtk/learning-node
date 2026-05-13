@@ -2,6 +2,7 @@ import type { IncomingMessage, ServerResponse } from "http";
 import { insertProduct, readProduct } from "../service/product.service";
 import type { IProduct } from "./../types/product.type";
 import { parseBody } from "../utilities/parseBody";
+import { sendResponse } from "../utilities/sendResponse";
 
 
 export const productController = async (
@@ -93,13 +94,6 @@ export const productController = async (
     }
     products.splice(index,1);
     insertProduct(products);
-    res.writeHead(200, { "content-type": "application/json" });
-
-    res.end(
-      JSON.stringify({
-        message: "Product id deleted",
-        data: products,
-      }),
-    );
+    return sendResponse(res,true,200,"Product is deleted successfully",products)
   }
 };
