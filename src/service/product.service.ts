@@ -7,7 +7,8 @@ export const readProduct =()=>{
 
     const products = fs.readFileSync(filePath,"utf-8")
     return JSON.parse(products);
+}
 
-
-
+export const insertProduct =(payload: any)=>{
+    fs.writeFileSync(filePath,JSON.stringify(payload))
 }
